@@ -1,5 +1,8 @@
 # kquarto.r.inrae (development version)
 
+* Le template `inrae` utilise le logo officiel INRAE
+  (`images/logo-inrae.png`) à la place de l'emplacement provisoire.
+
 # kquarto.r.inrae 0.1.0
 
 * Première version : template `inrae` pour les books Quarto de
