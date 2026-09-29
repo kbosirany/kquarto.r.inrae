@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/kbosirany/kquarto.r.inrae/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/kbosirany/kquarto.r.inrae/blob/v0.1.0/DESCRIPTION)
 
 Orlando KB (2026). *kquarto.r.inrae: 'Quarto' Book Templates Following
 the INRAE Graphic Charter*. R package version 0.1.0,

@@ -36,7 +36,7 @@ The path of the template folder, invisibly.
 ``` r
 old <- options(kquarto.r.template_dir = tempfile())
 path <- create_template_book("inrae_mon_unite")
-#> Template 'inrae_mon_unite' created in: /tmp/RtmpoA417Y/file1a982050342d/inrae_mon_unite
+#> Template 'inrae_mon_unite' created in: /tmp/RtmpNoZcgK/file1ac55effd7f0/inrae_mon_unite
 list.files(path, recursive = TRUE)
 #> [1] "_quarto.yml"           "images/logo-inrae.svg" "index.qmd"            
 #> [4] "inrae.scss"            "references.bib"       
