@@ -1,0 +1,85 @@
+# Équivalent GitLab CI des workflows GitHub (.github/workflows) :
+# - check : R CMD check (R release, et R devel sans bloquer le pipeline) ;
+# - pages : site pkgdown, branche main à la racine et dev dans /dev.
+#
+# Les images rocker/verse contiennent R, pandoc et Quarto. Les dépendances
+# sont installées avec pak, qui lit le champ Remotes de DESCRIPTION.
+# Pour éviter la limite de requêtes anonymes de l'API GitHub, définir une
+# variable CI/CD masquée GITHUB_PAT (jeton GitHub en lecture seule).
+
+stages:
+  - check
+  - pages
+
+variables:
+  R_KEEP_PKG_SOURCE: "yes"
+  _R_CHECK_FORCE_SUGGESTS_: "false"
+
+.r-setup: &r-setup
+  - Rscript -e 'install.packages("pak")'
+
+.check:
+  stage: check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_TAG
+  script:
+    - *r-setup
+    - >-
+      Rscript -e 'pak::local_install_dev_deps(dependencies = TRUE);
+      pak::pkg_install("rcmdcheck")'
+    - >-
+      Rscript -e 'rcmdcheck::rcmdcheck(
+      args = c("--no-manual", "--as-cran"),
+      build_args = "--no-manual",
+      error_on = "warning",
+      check_dir = "check")'
+  artifacts:
+    when: on_failure
+    paths:
+      - check/
+    expire_in: 1 week
+
+check:
+  extends: .check
+  image: rocker/verse:latest
+
+check-devel:
+  extends: .check
+  image: rocker/verse:devel
+  allow_failure: true
+
+pages:
+  stage: pages
+  image: rocker/verse:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "dev"
+  variables:
+    GIT_DEPTH: "0"
+  script:
+    - *r-setup
+    - >-
+      Rscript -e 'pak::local_install_dev_deps(dependencies = TRUE);
+      pak::pkg_install("pkgdown")'
+    # GitLab Pages ne garde que le dernier déploiement : chaque pipeline
+    # reconstruit donc les sites des deux branches.
+    - git fetch origin main dev || git fetch origin main
+    - |
+      for branch in main dev; do
+        git rev-parse -q --verify "origin/$branch" > /dev/null || continue
+        git worktree add "/tmp/site-$branch" "origin/$branch"
+        [ -f "/tmp/site-$branch/DESCRIPTION" ] || continue
+        if [ "$branch" = "dev" ]; then mode=devel; else mode=release; fi
+        PKGDOWN_DEV_MODE=$mode Rscript -e "pkgdown::build_site(
+          '/tmp/site-$branch',
+          override = list(
+            destination = '$CI_PROJECT_DIR/public',
+            url = Sys.getenv('CI_PAGES_URL')
+          ),
+          preview = FALSE
+        )"
+      done
+  artifacts:
+    paths:
+      - public

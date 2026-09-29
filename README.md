@@ -1,4 +1,72 @@
 # kquarto.r.inrae
 
-Template INRAE pour les books Quarto de
-[kquarto.r](https://github.com/kbosirany/kquarto.r).
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/kbosirany/kquarto.r.inrae/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbosirany/kquarto.r.inrae/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+Site : <https://kbosirany.github.io/kquarto.r.inrae/> (version en
+développement : [/dev](https://kbosirany.github.io/kquarto.r.inrae/dev/))
+
+Template INRAE pour les rapports Quarto de type *book* créés avec
+[kquarto.r](https://github.com/kbosirany/kquarto.r) : couleurs et polices
+de la [charte graphique INRAE](https://www.inrae.fr/charte-graphique-inrae),
+logo, page de titre et bibliographie.
+
+## Installation
+
+```r
+# install.packages("pak")
+pak::pak("kbosirany/kquarto.r.inrae")
+```
+
+`kquarto.r` n'étant pas sur le CRAN, il est installé depuis GitHub (champ
+`Remotes` de `DESCRIPTION`).
+
+## Utilisation
+
+```r
+library(kquarto.r.inrae)
+
+# Le template INRAE est utilisé par défaut
+create_book(
+  "rapport_technique",
+  title = "Rapport technique",
+  author = "Kevin Orlando",
+  chapters = c("Introduction", "Méthodes", "Résultats")
+)
+render_book("rapport_technique")
+```
+
+`render_book()`, `create_book_chapter()`, `list_books()`,
+`remove_template_book()` et `template_dir()` sont celles de `kquarto.r`.
+
+Le template est aussi utilisable depuis `kquarto.r`, sans charger ce
+package :
+
+```r
+kquarto.r::create_book("rapport", template = "kquarto.r.inrae::inrae")
+
+# ou par défaut pour tous les projets, dans le .Rprofile :
+options(kquarto.r.template = "kquarto.r.inrae::inrae")
+```
+
+## Personnaliser le template
+
+Pour une unité ou un projet (autre logo, chapitres types, ...), dériver un
+template utilisateur du template INRAE puis modifier ses fichiers :
+
+```r
+path <- create_template_book("inrae_mon_unite")
+# modifier path/_quarto.yml, path/images/, ...
+create_book("rapport", template = "inrae_mon_unite")
+```
+
+Contenu du template (`inst/templates/inrae/`) :
+
+- `_quarto.yml` : book HTML en français, page de titre (titre,
+  sous-titre, auteurs, date), logo, pied de page, bibliographie ;
+- `inrae.scss` : couleurs et polices de la charte (Raleway pour les
+  titres, Avenir Next Pro ou Calibri pour le texte) ;
+- `references.bib` : bibliographie, citée avec `[@cle]` ;
+- `images/logo-inrae.svg` : **emplacement du logo, à remplacer par le
+  logo officiel**.
