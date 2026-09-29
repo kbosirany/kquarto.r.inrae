@@ -9,9 +9,8 @@ book:
   date-format: long
   chapters:
     - index.qmd
-  favicon: images/logo-inrae.svg
   sidebar:
-    logo: images/logo-inrae.svg
+    logo: images/logo-inrae.png
     style: docked
   page-footer:
     left: "INRAE"
