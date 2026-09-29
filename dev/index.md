@@ -75,5 +75,4 @@ Contenu du template (`inst/templates/inrae/`) :
 - `inrae.scss` : couleurs et polices de la charte (Raleway pour les
   titres, Avenir Next Pro ou Calibri pour le texte) ;
 - `references.bib` : bibliographie, citée avec `[@cle]` ;
-- `images/logo-inrae.svg` : **emplacement du logo, à remplacer par le
-  logo officiel**.
+- `images/logo-inrae.png` : logo INRAE, affiché dans la barre latérale.
