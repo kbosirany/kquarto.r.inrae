@@ -1,7 +1,7 @@
 Package: kquarto.r.inrae
 Type: Package
 Title: 'Quarto' Book Templates Following the INRAE Graphic Charter
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: c(
     person(
       given = c("Kevin", "Bosirany"),

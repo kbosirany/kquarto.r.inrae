@@ -1,3 +1,5 @@
+# kquarto.r.inrae (development version)
+
 # kquarto.r.inrae 0.1.0
 
 * Première version : template `inrae` pour les books Quarto de
