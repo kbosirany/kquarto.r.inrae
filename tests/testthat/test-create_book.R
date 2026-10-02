@@ -4,6 +4,7 @@ test_that("the INRAE template is shipped with the package", {
   expect_true(file.exists(file.path(path, "references.bib")))
   expect_true(file.exists(file.path(path, "inrae.scss")))
   expect_true(file.exists(file.path(path, "images", "logo-inrae.png")))
+  expect_true(file.exists(file.path(path, "images", "favicon-inrae.png")))
 })
 
 test_that("create_book() uses the INRAE template by default", {

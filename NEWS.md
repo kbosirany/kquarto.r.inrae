@@ -2,6 +2,7 @@
 
 * Le template `inrae` utilise le logo officiel INRAE
   (`images/logo-inrae.png`) à la place de l'emplacement provisoire.
+* Le template `inrae` définit le favicon du book (sigle INRAE, `images/favicon-inrae.png`).
 
 # kquarto.r.inrae 0.1.0
 
