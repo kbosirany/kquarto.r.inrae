@@ -47,7 +47,7 @@ create_book(
 #> Book(s) created: rapport_technique
 list.files(file.path(tmp, "rapport_technique"), recursive = TRUE)
 #> [1] "_quarto.yml"                  "chapitre-01-introduction.qmd"
-#> [3] "chapitre-02-methodes.qmd"     "images/logo-inrae.png"       
-#> [5] "index.qmd"                    "inrae.scss"                  
-#> [7] "references.bib"              
+#> [3] "chapitre-02-methodes.qmd"     "images/favicon-inrae.png"    
+#> [5] "images/logo-inrae.png"        "index.qmd"                   
+#> [7] "inrae.scss"                   "references.bib"              
 ```

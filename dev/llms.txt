@@ -71,11 +71,13 @@ create_book("rapport", template = "inrae_mon_unite")
 Contenu du template (`inst/templates/inrae/`) :
 
 - `_quarto.yml` : book HTML en français, page de titre (titre,
-  sous-titre, auteurs, date), logo, pied de page, bibliographie ;
+  sous-titre, auteurs, date), logo, favicon, pied de page, bibliographie
+  ;
 - `inrae.scss` : couleurs et polices de la charte (Raleway pour les
   titres, Avenir Next Pro ou Calibri pour le texte) ;
 - `references.bib` : bibliographie, citée avec `[@cle]` ;
-- `images/logo-inrae.png` : logo INRAE, affiché dans la barre latérale.
+- `images/logo-inrae.png` : logo INRAE, affiché dans la barre latérale ;
+- `images/favicon-inrae.png` : sigle INRAE, utilisé comme favicon.
 
 # Package index
 
